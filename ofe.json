@@ -1,6 +1,7 @@
 {
   "default": {
-    "extensions": [".js", ".json"]
+    "extensions": [".js", ".json"],
+    "exclusions": ["node_modules/", "dist/"]
   },
   "docs": {
     "extensions": [".md"],
