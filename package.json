@@ -11,15 +11,16 @@
     "dist"
   ],
   "scripts": {
-    "start": "node ./src/index.js",
     "build": "babel src/ --out-dir dist/"
   },
   "bin": {
-    "asdf-status": "bin/asdf-status.js"
+    "asdf-status": "dist/bin/asdf-status.js"
   },
   "author": "eriknomitch <enomitch@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "commander": "^2.14.1"
+  },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.40",
     "@babel/core": "^7.0.0-beta.40",
