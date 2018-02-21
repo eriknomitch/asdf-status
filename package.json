@@ -1,0 +1,36 @@
+{
+  "name": "asdf-status",
+  "version": "0.0.0",
+  "description": "CLI status output for installed asdf plugins",
+  "repository": {
+    "url": "eriknomitch/asdf-status",
+    "type": "git"
+  },
+  "main": "dist/asdf-status.cjs.js",
+  
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "npm run lint && echo 'no tests!'",
+    "lint": "standard",
+    "prepublishOnly": "npm run build",
+    "build": "bili",
+    "example": "poi",
+    "build:example": "poi build"
+    
+  },
+  "author": "eriknomitch <enomitch@gmail.com>",
+  "license": "MIT",
+  "poi": {
+    "entry": "example/index.js",
+    "dist": "example/dist",
+    "homepage": "/"
+  },
+  "dependencies": {},
+  "devDependencies": {,
+    "standard": "^10.0.0",
+    "poi": "^9.6.13",
+    "bili": "^2.2.3"
+  }
+}
