@@ -1,6 +1,6 @@
 {
   "default": {
-    "extensions": [".rb"]
+    "extensions": [".js", ".json"]
   },
   "docs": {
     "extensions": [".md"],
