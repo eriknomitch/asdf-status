@@ -12,14 +12,15 @@
   ],
   "scripts": {
     "start": "node ./src/index.js",
-    "build": "babel src/ --presets babel-preset-es2015 --out-dir dist/"
+    "build": "babel src/ --out-dir dist/"
   },
   "author": "eriknomitch <enomitch@gmail.com>",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0"
