@@ -4,13 +4,20 @@
 // ===============================================
 import program from 'commander';
 import shell from 'shelljs';
+import fs from 'fs';
+import R from 'ramda';
 import _ from 'lodash';
+
+// -----------------------------------------------
+// CONSTANTS -------------------------------------
+// -----------------------------------------------
+const VERSION = _.trimEnd(fs.readFileSync('VERSION', 'utf8'), '\n');
 
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
 // -----------------------------------------------
 program
-  .version('0.1.0')
+  .version(VERSION)
   .option('-U, --update-plugins', 'Update plugins')
   .parse(process.argv);
 
@@ -21,12 +28,3 @@ if (program.updatePlugins) {
   console.log('update');
 }
 
-const asdfPlugins =
-  _.chain(shell.exec('asdf plugin-list', { silent: true }))
-    .trimEnd('\n')
-    .split('\n')
-    .value();
-
-_.each(asdfPlugins, (asdfPlugin) => {
-  console.log(`pkg: ${asdfPlugin}`);
-});

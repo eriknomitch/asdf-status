@@ -5,6 +5,10 @@ var _commander = _interopRequireDefault(require("commander"));
 
 var _shelljs = _interopRequireDefault(require("shelljs"));
 
+var _fs = _interopRequireDefault(require("fs"));
+
+var _ramda = _interopRequireDefault(require("ramda"));
+
 var _lodash = _interopRequireDefault(require("lodash"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -13,9 +17,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ASDF-STATUS ===================================
 // ===============================================
 // -----------------------------------------------
+// CONSTANTS -------------------------------------
+// -----------------------------------------------
+var VERSION = _lodash.default.trimEnd(_fs.default.readFileSync('VERSION', 'utf8'), '\n'); // -----------------------------------------------
 // PROGRAM ---------------------------------------
 // -----------------------------------------------
-_commander.default.version('0.1.0').option('-U, --update-plugins', 'Update plugins').parse(process.argv); // ===============================================
+
+
+_commander.default.version(VERSION).option('-U, --update-plugins', 'Update plugins').parse(process.argv); // ===============================================
 // MAIN ==========================================
 // ===============================================
 
@@ -23,11 +32,3 @@ _commander.default.version('0.1.0').option('-U, --update-plugins', 'Update plugi
 if (_commander.default.updatePlugins) {
   console.log('update');
 }
-
-var asdfPackages = _lodash.default.chain(_shelljs.default.exec('asdf plugin-list', {
-  silent: true
-})).trimEnd('\n').split('\n').value();
-
-_lodash.default.each(asdfPackages, function (asdfPackage) {
-  console.log("pkg: ".concat(asdfPackage));
-});
