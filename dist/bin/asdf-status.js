@@ -19,7 +19,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // -----------------------------------------------
 // CONSTANTS -------------------------------------
 // -----------------------------------------------
-var VERSION = _lodash.default.trimEnd(_fs.default.readFileSync('VERSION', 'utf8'), '\n'); // -----------------------------------------------
+var VERSION = _fs.default.readFileSync('VERSION', 'utf8').trim(); // -----------------------------------------------
+// UTILITY ---------------------------------------
+// -----------------------------------------------
+// -----------------------------------------------
 // PROGRAM ---------------------------------------
 // -----------------------------------------------
 
@@ -31,4 +34,19 @@ _commander.default.version(VERSION).option('-U, --update-plugins', 'Update plugi
 
 if (_commander.default.updatePlugins) {
   console.log('update');
-}
+} // -----------------------------------------------
+// -----------------------------------------------
+// -----------------------------------------------
+
+
+var plugins = {};
+
+_lodash.default.trimEnd(_shelljs.default.exec('asdf plugin-list'), '\n').split('\n').forEach(function (plugin) {
+  plugins[plugin] = {
+    version: {
+      installed: _shelljs.default.exec("asdf list ".concat(plugin)).stdout.trim()
+    }
+  };
+});
+
+console.log(plugins);

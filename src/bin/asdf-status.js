@@ -11,7 +11,11 @@ import _ from 'lodash';
 // -----------------------------------------------
 // CONSTANTS -------------------------------------
 // -----------------------------------------------
-const VERSION = _.trimEnd(fs.readFileSync('VERSION', 'utf8'), '\n');
+const VERSION = fs.readFileSync('VERSION', 'utf8').trim();
+
+// -----------------------------------------------
+// UTILITY ---------------------------------------
+// -----------------------------------------------
 
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
@@ -28,3 +32,17 @@ if (program.updatePlugins) {
   console.log('update');
 }
 
+// -----------------------------------------------
+// -----------------------------------------------
+// -----------------------------------------------
+const plugins = {};
+
+_.trimEnd(shell.exec('asdf plugin-list'), '\n').split('\n').forEach((plugin) => {
+  plugins[plugin] = {
+    version: {
+      installed: shell.exec(`asdf list ${plugin}`).stdout.trim(),
+    },
+  };
+});
+
+console.log(plugins);
