@@ -6,8 +6,10 @@ import program from 'commander';
 import shell from 'shelljs';
 import fs from 'fs';
 import chalk from 'chalk';
+/* eslint-disable */
 import R from 'ramda';
 import _ from 'lodash';
+/* eslint-enable */
 
 // -----------------------------------------------
 // ALIASES ---------------------------------------
@@ -22,7 +24,7 @@ const VERSION = fs.readFileSync('VERSION', 'utf8').trim();
 // -----------------------------------------------
 // UTILITY ---------------------------------------
 // -----------------------------------------------
-const exec = command => shell.exec(command, { silent: true }).stdout.trim();
+const X = command => shell.exec(command, { silent: true }).stdout.trim();
 
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
@@ -44,13 +46,13 @@ if (program.updatePlugins) {
 // -----------------------------------------------
 const plugins = {};
 
-exec('asdf plugin-list').split('\n').forEach((plugin) => {
+X('asdf plugin-list').split('\n').forEach((plugin) => {
   log(chalk.white.bold(plugin));
 
   plugins[plugin] = {
     version: {
-      installed: exec(`asdf list ${plugin}`),
-      latest: exec(`asdf list-all ${plugin} | tail -n 1`),
+      installed: X(`asdf list ${plugin}`),
+      latest: X(`asdf list-all ${plugin} | tail -n 1`),
     },
   };
 });
