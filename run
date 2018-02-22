@@ -1,4 +1,4 @@
 #!/bin/zsh
 
-npm run build &&
-  npm link --force
+npm run-script build &&
+  npm link
