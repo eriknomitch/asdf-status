@@ -3,6 +3,7 @@
 // ASDF-STATUS ===================================
 // ===============================================
 import program from 'commander';
+import shell from 'shelljs';
 
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
@@ -15,3 +16,12 @@ program
 if (program.updatePlugins) {
   console.log('update');
 }
+
+// ===============================================
+// MAIN ==========================================
+// ===============================================
+shell.exec('asdf plugin-list', {
+  silent: true,
+}, (code, stdout, stderr) => {
+  stdout.split('\n').forEach(pkg => console.log(`ok: ${pkg}`));
+});

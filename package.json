@@ -28,6 +28,7 @@
     "@babel/preset-env": "^7.0.0-beta.40",
     "eslint": "^4.18.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "prettier": "^1.10.2"
   }
 }
