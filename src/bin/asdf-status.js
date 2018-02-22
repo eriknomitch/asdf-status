@@ -37,10 +37,11 @@ if (program.updatePlugins) {
 // -----------------------------------------------
 const plugins = {};
 
-_.trimEnd(shell.exec('asdf plugin-list'), '\n').split('\n').forEach((plugin) => {
+shell.exec('asdf plugin-list').trim().split('\n').forEach((plugin) => {
   plugins[plugin] = {
     version: {
       installed: shell.exec(`asdf list ${plugin}`).stdout.trim(),
+      latest: shell.exec(`asdf list-all ${plugin} | tail -n 1`).stdout.trim(),
     },
   };
 });

@@ -41,10 +41,11 @@ if (_commander.default.updatePlugins) {
 
 var plugins = {};
 
-_lodash.default.trimEnd(_shelljs.default.exec('asdf plugin-list'), '\n').split('\n').forEach(function (plugin) {
+_shelljs.default.exec('asdf plugin-list').trim().split('\n').forEach(function (plugin) {
   plugins[plugin] = {
     version: {
-      installed: _shelljs.default.exec("asdf list ".concat(plugin)).stdout.trim()
+      installed: _shelljs.default.exec("asdf list ".concat(plugin)).stdout.trim(),
+      latest: _shelljs.default.exec("asdf list-all ".concat(plugin, " | tail -n 1")).stdout.trim()
     }
   };
 });
