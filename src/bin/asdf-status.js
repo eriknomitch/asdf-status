@@ -5,8 +5,14 @@
 import program from 'commander';
 import shell from 'shelljs';
 import fs from 'fs';
+import chalk from 'chalk';
 import R from 'ramda';
 import _ from 'lodash';
+
+// -----------------------------------------------
+// ALIASES ---------------------------------------
+// -----------------------------------------------
+const { log } = console;
 
 // -----------------------------------------------
 // CONSTANTS -------------------------------------
@@ -16,6 +22,7 @@ const VERSION = fs.readFileSync('VERSION', 'utf8').trim();
 // -----------------------------------------------
 // UTILITY ---------------------------------------
 // -----------------------------------------------
+const exec = command => shell.exec(command, { silent: true }).stdout.trim();
 
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
@@ -29,7 +36,7 @@ program
 // MAIN ==========================================
 // ===============================================
 if (program.updatePlugins) {
-  console.log('update');
+  log('update');
 }
 
 // -----------------------------------------------
@@ -37,11 +44,13 @@ if (program.updatePlugins) {
 // -----------------------------------------------
 const plugins = {};
 
-shell.exec('asdf plugin-list').trim().split('\n').forEach((plugin) => {
+exec('asdf plugin-list').split('\n').forEach((plugin) => {
+  log(chalk.white.bold(plugin));
+
   plugins[plugin] = {
     version: {
-      installed: shell.exec(`asdf list ${plugin}`).stdout.trim(),
-      latest: shell.exec(`asdf list-all ${plugin} | tail -n 1`).stdout.trim(),
+      installed: exec(`asdf list ${plugin}`),
+      latest: exec(`asdf list-all ${plugin} | tail -n 1`),
     },
   };
 });

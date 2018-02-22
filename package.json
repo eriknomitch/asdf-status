@@ -19,6 +19,7 @@
   "author": "eriknomitch <enomitch@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.3.1",
     "commander": "^2.14.1",
     "lodash": "^4.17.5",
     "ramda": "^0.25.0",

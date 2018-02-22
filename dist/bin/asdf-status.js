@@ -7,6 +7,8 @@ var _shelljs = _interopRequireDefault(require("shelljs"));
 
 var _fs = _interopRequireDefault(require("fs"));
 
+var _chalk = _interopRequireDefault(require("chalk"));
+
 var _ramda = _interopRequireDefault(require("ramda"));
 
 var _lodash = _interopRequireDefault(require("lodash"));
@@ -17,12 +19,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ASDF-STATUS ===================================
 // ===============================================
 // -----------------------------------------------
+// ALIASES ---------------------------------------
+// -----------------------------------------------
+var _console = console,
+    log = _console.log; // -----------------------------------------------
 // CONSTANTS -------------------------------------
 // -----------------------------------------------
+
 var VERSION = _fs.default.readFileSync('VERSION', 'utf8').trim(); // -----------------------------------------------
 // UTILITY ---------------------------------------
 // -----------------------------------------------
-// -----------------------------------------------
+
+
+var exec = function exec(command) {
+  return _shelljs.default.exec(command, {
+    silent: true
+  }).stdout.trim();
+}; // -----------------------------------------------
 // PROGRAM ---------------------------------------
 // -----------------------------------------------
 
@@ -33,21 +46,20 @@ _commander.default.version(VERSION).option('-U, --update-plugins', 'Update plugi
 
 
 if (_commander.default.updatePlugins) {
-  console.log('update');
+  log('update');
 } // -----------------------------------------------
 // -----------------------------------------------
 // -----------------------------------------------
 
 
 var plugins = {};
-
-_shelljs.default.exec('asdf plugin-list').trim().split('\n').forEach(function (plugin) {
+exec('asdf plugin-list').split('\n').forEach(function (plugin) {
+  log(_chalk.default.white.bold(plugin));
   plugins[plugin] = {
     version: {
-      installed: _shelljs.default.exec("asdf list ".concat(plugin)).stdout.trim(),
-      latest: _shelljs.default.exec("asdf list-all ".concat(plugin, " | tail -n 1")).stdout.trim()
+      installed: exec("asdf list ".concat(plugin)),
+      latest: exec("asdf list-all ".concat(plugin, " | tail -n 1"))
     }
   };
 });
-
 console.log(plugins);
