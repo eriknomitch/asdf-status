@@ -1,3 +1,4 @@
 #!/bin/zsh
 
-yarn run build
+npm run build &&
+  npm link --force
