@@ -5,6 +5,8 @@ var _commander = _interopRequireDefault(require("commander"));
 
 var _shelljs = _interopRequireDefault(require("shelljs"));
 
+var _lodash = _interopRequireDefault(require("lodash"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // ===============================================
@@ -24,8 +26,8 @@ if (_commander.default.updatePlugins) {
 
 _shelljs.default.exec('asdf plugin-list', {
   silent: true
-}, function (code, stdout, stderr) {
-  stdout.split('\n').forEach(function (pkg) {
+}, function (code, stdout) {
+  _lodash.default.split(_lodash.default.trimEnd(stdout, '\n'), '\n').forEach(function (pkg) {
     return console.log("ok: ".concat(pkg));
   });
 });

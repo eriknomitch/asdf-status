@@ -4,6 +4,7 @@
 // ===============================================
 import program from 'commander';
 import shell from 'shelljs';
+import _ from 'lodash';
 
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
@@ -20,8 +21,10 @@ if (program.updatePlugins) {
 // ===============================================
 // MAIN ==========================================
 // ===============================================
-shell.exec('asdf plugin-list', {
-  silent: true,
-}, (code, stdout, stderr) => {
-  stdout.split('\n').forEach(pkg => console.log(`ok: ${pkg}`));
-});
+shell.exec(
+  'asdf plugin-list',
+  { silent: true },
+  (code, stdout) => {
+    _.split(_.trimEnd(stdout, '\n'), '\n').forEach(pkg => console.log(`ok: ${pkg}`));
+  },
+);
