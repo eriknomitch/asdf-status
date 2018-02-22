@@ -14,17 +14,19 @@ program
   .option('-U, --update-plugins', 'Update plugins')
   .parse(process.argv);
 
+// ===============================================
+// MAIN ==========================================
+// ===============================================
 if (program.updatePlugins) {
   console.log('update');
 }
 
-// ===============================================
-// MAIN ==========================================
-// ===============================================
-shell.exec(
-  'asdf plugin-list',
-  { silent: true },
-  (code, stdout) => {
-    _.split(_.trimEnd(stdout, '\n'), '\n').forEach(pkg => console.log(`ok: ${pkg}`));
-  },
-);
+const asdfPlugins =
+  _.chain(shell.exec('asdf plugin-list', { silent: true }))
+    .trimEnd('\n')
+    .split('\n')
+    .value();
+
+_.each(asdfPlugins, (asdfPlugin) => {
+  console.log(`pkg: ${asdfPlugin}`);
+});

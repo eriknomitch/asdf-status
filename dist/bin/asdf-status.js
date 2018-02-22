@@ -15,19 +15,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
 // -----------------------------------------------
-_commander.default.version('0.1.0').option('-U, --update-plugins', 'Update plugins').parse(process.argv);
-
-if (_commander.default.updatePlugins) {
-  console.log('update');
-} // ===============================================
+_commander.default.version('0.1.0').option('-U, --update-plugins', 'Update plugins').parse(process.argv); // ===============================================
 // MAIN ==========================================
 // ===============================================
 
 
-_shelljs.default.exec('asdf plugin-list', {
+if (_commander.default.updatePlugins) {
+  console.log('update');
+}
+
+var asdfPackages = _lodash.default.chain(_shelljs.default.exec('asdf plugin-list', {
   silent: true
-}, function (code, stdout) {
-  _lodash.default.split(_lodash.default.trimEnd(stdout, '\n'), '\n').forEach(function (pkg) {
-    return console.log("ok: ".concat(pkg));
-  });
+})).trimEnd('\n').split('\n').value();
+
+_lodash.default.each(asdfPackages, function (asdfPackage) {
+  console.log("pkg: ".concat(asdfPackage));
 });
