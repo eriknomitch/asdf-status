@@ -1,21 +1,16 @@
 
 # asdf-status
 
-[![NPM version](https://img.shields.io/npm/v/asdf-status.svg?style=flat)](https://npmjs.com/package/asdf-status) [![NPM downloads](https://img.shields.io/npm/dm/asdf-status.svg?style=flat)](https://npmjs.com/package/asdf-status) [![CircleCI](https://circleci.com/gh/eriknomitch/asdf-status/tree/master.svg?style=shield)](https://circleci.com/gh/eriknomitch/asdf-status/tree/master)  [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/eriknomitch/donate)
-
 ## Install
 
 ```bash
-yarn add asdf-status
+npm install -g asdf-status
 ```
 
 ## Usage
 
-```js
-const asdfStatus = require('asdf-status')
-
-asdfStatus()
-//=> foo
+```shell
+$ asdf-status
 ```
 
 ## Contributing
@@ -24,7 +19,7 @@ asdfStatus()
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+5. Submit a pull request
 
 
 ## Author
