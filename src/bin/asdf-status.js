@@ -38,7 +38,8 @@ program
 // MAIN ==========================================
 // ===============================================
 if (program.updatePlugins) {
-  log('update');
+  log('Updating all plugins...');
+  X('asdf plugin-update --all');
 }
 
 // -----------------------------------------------

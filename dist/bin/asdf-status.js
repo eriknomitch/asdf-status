@@ -50,16 +50,17 @@ _commander.default.version(VERSION).option('-U, --update-plugins', 'Update plugi
 
 
 if (_commander.default.updatePlugins) {
-  log('update');
+  log('Updating all plugins...');
+  X('asdf plugin-update --all');
 } // -----------------------------------------------
 // -----------------------------------------------
 // -----------------------------------------------
 
 
-var plugins = {};
 X('asdf plugin-list').split('\n').forEach(function (pluginName) {
   log("".concat(_chalk.default.green.bold('>'), " ").concat(_chalk.default.white.bold(pluginName)));
-  var plugin = plugins[pluginName] = {
+  var plugin = {
+    name: pluginName,
     version: {
       installed: X("asdf list ".concat(pluginName)),
       latest: X("asdf list-all ".concat(pluginName, " | tail -n 1"))
