@@ -46,15 +46,23 @@ if (program.updatePlugins) {
 // -----------------------------------------------
 const plugins = {};
 
-X('asdf plugin-list').split('\n').forEach((plugin) => {
-  log(chalk.white.bold(plugin));
+X('asdf plugin-list').split('\n').forEach((pluginName) => {
 
-  plugins[plugin] = {
+  log(`${chalk.green.bold('>')} ${chalk.white.bold(pluginName)}`);
+
+  const plugin = plugins[pluginName] = {
     version: {
-      installed: X(`asdf list ${plugin}`),
-      latest: X(`asdf list-all ${plugin} | tail -n 1`),
+      installed: X(`asdf list ${pluginName}`),
+      latest: X(`asdf list-all ${pluginName} | tail -n 1`),
     },
   };
+
+  plugin.current = plugin.version.installed === plugin.version.latest;
+
+  const latestColor = plugin.current ? 'green' : 'yellow';
+
+  log(`  installed: ${chalk[latestColor].bold(plugin.version.installed)}`);
+  log(`     latest: ${chalk.white(plugin.version.latest)}`);
+  log();
 });
 
-console.log(plugins);

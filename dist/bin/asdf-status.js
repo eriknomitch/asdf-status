@@ -18,24 +18,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ===============================================
 // ASDF-STATUS ===================================
 // ===============================================
+
+/* eslint-disable */
+
+/* eslint-enable */
 // -----------------------------------------------
 // ALIASES ---------------------------------------
 // -----------------------------------------------
 var _console = console,
     log = _console.log; // -----------------------------------------------
-// CONSTANTS -------------------------------------
+// UTILITY->SHELL --------------------------------
 // -----------------------------------------------
 
-var VERSION = _fs.default.readFileSync('VERSION', 'utf8').trim(); // -----------------------------------------------
-// UTILITY ---------------------------------------
-// -----------------------------------------------
-
-
-var exec = function exec(command) {
+var X = function X(command) {
   return _shelljs.default.exec(command, {
     silent: true
   }).stdout.trim();
 }; // -----------------------------------------------
+// CONSTANTS -------------------------------------
+// -----------------------------------------------
+
+
+var VERSION = _fs.default.readFileSync('VERSION', 'utf8').trim(); // -----------------------------------------------
 // PROGRAM ---------------------------------------
 // -----------------------------------------------
 
@@ -53,13 +57,17 @@ if (_commander.default.updatePlugins) {
 
 
 var plugins = {};
-exec('asdf plugin-list').split('\n').forEach(function (plugin) {
-  log(_chalk.default.white.bold(plugin));
-  plugins[plugin] = {
+X('asdf plugin-list').split('\n').forEach(function (pluginName) {
+  log("".concat(_chalk.default.green.bold('>'), " ").concat(_chalk.default.white.bold(pluginName)));
+  var plugin = plugins[pluginName] = {
     version: {
-      installed: exec("asdf list ".concat(plugin)),
-      latest: exec("asdf list-all ".concat(plugin, " | tail -n 1"))
+      installed: X("asdf list ".concat(pluginName)),
+      latest: X("asdf list-all ".concat(pluginName, " | tail -n 1"))
     }
   };
+  plugin.current = plugin.version.installed === plugin.version.latest;
+  var latestColor = plugin.current ? 'green' : 'yellow';
+  log("  installed: ".concat(_chalk.default[latestColor].bold(plugin.version.installed)));
+  log("     latest: ".concat(_chalk.default.white(plugin.version.latest)));
+  log();
 });
-console.log(plugins);
