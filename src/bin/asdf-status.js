@@ -44,13 +44,12 @@ if (program.updatePlugins) {
 // -----------------------------------------------
 // -----------------------------------------------
 // -----------------------------------------------
-const plugins = {};
-
 X('asdf plugin-list').split('\n').forEach((pluginName) => {
 
   log(`${chalk.green.bold('>')} ${chalk.white.bold(pluginName)}`);
 
-  const plugin = plugins[pluginName] = {
+  const plugin = {
+    name: pluginName,
     version: {
       installed: X(`asdf list ${pluginName}`),
       latest: X(`asdf list-all ${pluginName} | tail -n 1`),
