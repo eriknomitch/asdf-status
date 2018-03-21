@@ -24,7 +24,8 @@ const X = command => shell.exec(command, { silent: true }).stdout.trim();
 // -----------------------------------------------
 // CONSTANTS -------------------------------------
 // -----------------------------------------------
-const VERSION = fs.readFileSync('VERSION', 'utf8').trim();
+//const VERSION = fs.readFileSync('VERSION', 'utf8').trim();
+const VERSION = '0.1.0'
 
 // -----------------------------------------------
 // PROGRAM ---------------------------------------
